@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.projekat;
 
 public class Child {
+    private int id = -1;
     private String name;
     private String surname;
     private Parent parent1;
@@ -15,12 +16,21 @@ public class Child {
         yo = 0;
     }
 
-    public Child(String name, String surname, Parent parent1, int yo) {
+    public Child(int id, String name, String surname, Parent parent1, Parent parent2, int yo) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.parent1 = parent1;
-        this.parent2 = null;
+        this.parent2 = parent2;
         this.yo = yo;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
