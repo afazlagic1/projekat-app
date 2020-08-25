@@ -3,11 +3,18 @@ package ba.unsa.etf.rpr.projekat;
 import javafx.beans.property.SimpleStringProperty;
 
 public abstract class User {
-    private int id;
+    private int id = -1;
     private SimpleStringProperty name;
     private SimpleStringProperty surname;
     private SimpleStringProperty email;
     private SimpleStringProperty password;
+
+    public User() {
+        name = new SimpleStringProperty("");
+        surname = new SimpleStringProperty("");
+        email = new SimpleStringProperty("");
+        password = new SimpleStringProperty("");
+    }
 
     public int getId() {
         return id;
