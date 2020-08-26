@@ -6,13 +6,13 @@ public abstract class User {
     private int id = -1;
     private SimpleStringProperty name;
     private SimpleStringProperty surname;
-    private SimpleStringProperty email;
+    private SimpleStringProperty username;
     private SimpleStringProperty password;
 
     public User() {
         name = new SimpleStringProperty("");
         surname = new SimpleStringProperty("");
-        email = new SimpleStringProperty("");
+        username = new SimpleStringProperty("");
         password = new SimpleStringProperty("");
     }
 
@@ -20,7 +20,7 @@ public abstract class User {
         this.id = id;
         this.name = new SimpleStringProperty(name);
         this.surname = new SimpleStringProperty(surname);
-        this.email = new SimpleStringProperty(email);
+        this.username = new SimpleStringProperty(email);
         this.password = new SimpleStringProperty(password);
     }
 
@@ -56,16 +56,16 @@ public abstract class User {
         this.surname.set(surname);
     }
 
-    public String getEmail() {
-        return email.get();
+    public String getUsername() {
+        return username.get();
     }
 
-    public SimpleStringProperty emailProperty() {
-        return email;
+    public SimpleStringProperty usernameProperty() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email.set(email);
+    public void setUsername(String username) {
+        this.username.set(username);
     }
 
     public String getPassword() {

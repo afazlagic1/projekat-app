@@ -15,8 +15,8 @@ public class Parent extends User {
         this.status = status;
         this.phoneNumber = phoneNumber;
     }
-    public Parent(int id, String name, String surname, String email, String password, MaritalStatus status, int phoneNumber) {
-        super(id, name, surname, email, password);
+    public Parent(int id, String name, String surname, String username, String password, MaritalStatus status, int phoneNumber) {
+        super(id, name, surname, username, password);
         this.status = status;
         this.phoneNumber = phoneNumber;
     }

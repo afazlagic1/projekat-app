@@ -13,7 +13,7 @@ public class Teacher {
 
     private String name = "";
     private String surname = "";
-    private String email = "";
+    private String username = "";
     private int phoneNumber = 0;
     private Classroom classroom = null;
 
@@ -24,7 +24,7 @@ public class Teacher {
         this.id = id;
         this.name = name;
         this.surname = surname;
-        this.email = email;
+        this.username = email;
         this.phoneNumber = phoneNumber;
         this.classroom = classroom;
     }
@@ -45,12 +45,12 @@ public class Teacher {
         this.surname = surname;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public int getPhoneNumber() {
