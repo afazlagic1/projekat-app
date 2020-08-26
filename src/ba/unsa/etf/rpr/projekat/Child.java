@@ -16,7 +16,9 @@ public class Child {
         yo = 0;
     }
 
-    public Child(int id, String name, String surname, Parent parent1, Parent parent2, int yo) {
+    public Child(int id, String name, String surname, Parent parent1, Parent parent2, int yo) throws InvalidYearsOldException {
+        if(!(yo >= 1 && yo <= 6))
+            throw new InvalidYearsOldException("Invalid yo entry for the child.");
         this.id = id;
         this.name = name;
         this.surname = surname;

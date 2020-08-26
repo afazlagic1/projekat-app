@@ -16,6 +16,14 @@ public abstract class User {
         password = new SimpleStringProperty("");
     }
 
+    public User(int id, String name, String surname, String email, String password) {
+        this.id = id;
+        this.name = new SimpleStringProperty(name);
+        this.surname = new SimpleStringProperty(surname);
+        this.email = new SimpleStringProperty(email);
+        this.password = new SimpleStringProperty(password);
+    }
+
     public int getId() {
         return id;
     }
