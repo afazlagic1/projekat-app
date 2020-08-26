@@ -15,16 +15,18 @@ public class Teacher {
     private String surname = "";
     private String email = "";
     private int phoneNumber = 0;
+    private Classroom classroom = null;
 
     public Teacher() {
     }
 
-    public Teacher(int id, String name, String surname, String email, int phoneNumber) {
+    public Teacher(int id, String name, String surname, String email, int phoneNumber, Classroom classroom) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.classroom = classroom;
     }
 
     public String getName() {
@@ -57,5 +59,13 @@ public class Teacher {
 
     public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public Classroom getClassroom() {
+        return classroom;
+    }
+
+    public void setClassroom(Classroom classroom) {
+        this.classroom = classroom;
     }
 }

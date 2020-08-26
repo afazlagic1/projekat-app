@@ -10,6 +10,8 @@ public class Classroom {
     private static int capacity = 15;
 
     public Classroom(int id, List<Child> children, Teacher teacher) {
+        if(children.size() > capacity)
+            throw new ArrayIndexOutOfBoundsException();
         this.id = id;
         this.children = children;
         this.teacher = teacher;
@@ -31,7 +33,14 @@ public class Classroom {
     }
 
     public void setChildren(List<Child> children) {
+        if(children.size() > capacity)
+            throw new ArrayIndexOutOfBoundsException();
         this.children = children;
+    }
+
+    public void addChildToClassroom(Child child) {
+        if(getChildren().size() == capacity)
+            throw new ArrayIndexOutOfBoundsException();
     }
 
     public Teacher getTeacher() {
