@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class KindergartenDAO {
     private static KindergartenDAO instance;
     private Connection connection;
-    private PreparedStatement giveAdminStatement;
+    private PreparedStatement giveAdminsStatement, giveParentsStatement, giveAdminStatement, giveAdminByIdStatement, giveParentStatement, giveParentByIdStatement;
 
     public static KindergartenDAO getInstance() {
         if(instance == null)
@@ -24,20 +24,38 @@ public class KindergartenDAO {
         }
 
         try {
-            giveAdminStatement = connection.prepareStatement("SELECT * FROM admin");
+            giveAdminsStatement = connection.prepareStatement("SELECT admin.id, admin.name, admin.surname, admin.username, admin.password FROM admin");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
-
             regenerateDatabase();
 
             try {
-                giveAdminStatement = connection.prepareStatement("SELECT * FROM admin");
+                giveAdminsStatement = connection.prepareStatement("SELECT admin.id, admin.name, admin.surname, admin.username, admin.password FROM admin");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                giveAdminStatement = connection.prepareStatement("SELECT admin.id, admin.name, admin.surname, admin.username, admin.password FROM admin WHERE admin.username=? AND admin.password=?");
+                giveAdminByIdStatement = connection.prepareStatement("SELECT admin.id, admin.name, admin.surname, admin.username, admin.password FROM admin WHERE admin.id=?");
+                giveParentsStatement = connection.prepareStatement("SELECT parent.id, parent.name, parent.surname, parent.username, parent.password, parent.status, parent.phoneNumber FROM parent");
+                giveParentStatement = connection.prepareStatement("SELECT parent.id, parent.name, parent.surname, parent.username, parent.password, parent.status, parent.phoneNumber FROM parent WHERE parent.username=? AND parent.password=?");
+                giveParentByIdStatement = connection.prepareStatement("SELECT parent.id, parent.name, parent.surname, parent.username, parent.password, parent.status, parent.phoneNumber FROM parent WHERE parent.id=?");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
 
         }
 
+    }
+
+    public static void removeInstance() {
+        if(instance == null) return;
+        try {
+            instance.connection.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        instance = null;
     }
 
     private void regenerateDatabase() {
@@ -66,5 +84,45 @@ public class KindergartenDAO {
             }
         }
         ulaz.close();
+    }
+
+    public boolean loginCheckIfAdmin(String username, String password) {
+        ResultSet resultSet = null;
+        try {
+            giveAdminStatement.setString(1, username);
+            giveAdminStatement.setString(2, password);
+            resultSet = giveAdminStatement.executeQuery();
+            return resultSet.next();
+        }
+        catch (SQLException e) {
+            return false;
+        }
+        finally {
+            try {
+                resultSet.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+    }
+
+    public boolean loginCheckIfParent(String username, String password) {
+        ResultSet resultSet = null;
+        try {
+            giveParentStatement.setString(1, username);
+            giveParentStatement.setString(2, password);
+            resultSet = giveParentStatement.executeQuery();
+            return resultSet.next();
+        }
+        catch (SQLException e) {
+            return false;
+        }
+        finally {
+            try {
+                resultSet.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
     }
 }

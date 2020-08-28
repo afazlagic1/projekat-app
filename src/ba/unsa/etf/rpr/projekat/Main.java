@@ -12,6 +12,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/first.fxml"));
         FirstController firstController = new FirstController();
+        firstController.resetDatabase();
         loader.setController(firstController);
         Parent root = loader.load();
         primaryStage.setTitle("Kindergarten");
