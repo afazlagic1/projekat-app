@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class KindergartenDAO {
     private static KindergartenDAO instance;
     private Connection connection;
-    private PreparedStatement giveAdminsStatement, giveParentsStatement, giveAdminStatement, giveAdminByIdStatement, giveParentStatement, giveParentByIdStatement;
+    private PreparedStatement giveAdminsStatement, giveParentsStatement, giveAdminStatement, giveAdminByIdStatement, giveParentStatement, giveParentByIdStatement, checkIfUsernameTakenAdmin, checkIfUsernameTakenParent;
 
     public static KindergartenDAO getInstance() {
         if(instance == null)
@@ -37,6 +37,8 @@ public class KindergartenDAO {
             try {
                 giveAdminStatement = connection.prepareStatement("SELECT admin.id, admin.name, admin.surname, admin.username, admin.password FROM admin WHERE admin.username=? AND admin.password=?");
                 giveAdminByIdStatement = connection.prepareStatement("SELECT admin.id, admin.name, admin.surname, admin.username, admin.password FROM admin WHERE admin.id=?");
+                checkIfUsernameTakenAdmin = connection.prepareStatement("SELECT admin.id, admin.name, admin.surname, admin.username, admin.password FROM admin WHERE admin.username=?");
+                checkIfUsernameTakenParent = connection.prepareStatement("SELECT parent.id, parent.name, parent.surname, parent.username, parent.password, parent.status, parent.phoneNumber FROM parent WHERE parent.username=?");
                 giveParentsStatement = connection.prepareStatement("SELECT parent.id, parent.name, parent.surname, parent.username, parent.password, parent.status, parent.phoneNumber FROM parent");
                 giveParentStatement = connection.prepareStatement("SELECT parent.id, parent.name, parent.surname, parent.username, parent.password, parent.status, parent.phoneNumber FROM parent WHERE parent.username=? AND parent.password=?");
                 giveParentByIdStatement = connection.prepareStatement("SELECT parent.id, parent.name, parent.surname, parent.username, parent.password, parent.status, parent.phoneNumber FROM parent WHERE parent.id=?");
@@ -120,6 +122,34 @@ public class KindergartenDAO {
         finally {
             try {
                 resultSet.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+    }
+
+    public boolean registerCheckIfUsernameTaken(String username) {
+        ResultSet resultSetA = null;
+        ResultSet resultSetP = null;
+        try {
+            checkIfUsernameTakenAdmin.setString(1, username);
+            checkIfUsernameTakenParent.setString(1, username);
+            resultSetA = checkIfUsernameTakenAdmin.executeQuery();
+            if(resultSetA.next())
+                return true;
+            resultSetP = checkIfUsernameTakenParent.executeQuery();
+            if(resultSetP.next())
+                return true;
+            return false;
+        } catch (SQLException throwables) {
+            return true;
+        }
+        finally {
+            try {
+                if(resultSetA != null)
+                    resultSetA.close();
+                if(resultSetP != null)
+                    resultSetP.close();
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
