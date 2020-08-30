@@ -1,5 +1,7 @@
 package ba.unsa.etf.rpr.projekat;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,6 +17,7 @@ public class FirstController {
     public TextField surnameField;
     public TextField nameField;
     public ChoiceBox<MaritalStatus> statusBox;
+    public TextField phoneNumberField;
     private ObservableList<MaritalStatus> statusObservableList;
     public Button btnRegister;
     public Button btnLogin;
@@ -26,6 +29,13 @@ public class FirstController {
 
     @FXML
     public void initialize() {
+        phoneNumberField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
+                if(!newValue.matches("\\d*"))
+                    phoneNumberField.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
         ArrayList<MaritalStatus> arrayList = new ArrayList<>();
         arrayList.add(MaritalStatus.SINGLE);
         arrayList.add(MaritalStatus.MARRIED);
@@ -99,6 +109,12 @@ public class FirstController {
             alert.setContentText("Please enter your marital status before you register. :)");
             alert.showAndWait();
         }
+        else if(phoneNumberField.getText().equals("")) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("INVALID REGISTER");
+            alert.setContentText("Please enter your phone number before you register. :)");
+            alert.showAndWait();
+        }
         else {
             if(kindergartenDAO.registerCheckIfUsernameTaken(usernameField.getText())) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -111,6 +127,7 @@ public class FirstController {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("PARENT");
                 alert.showAndWait();
+                kindergartenDAO.addNewParentDB(nameField.getText(), surnameField.getText(), usernameField.getText(), passwordField.getText(), statusBox.getValue().toString(), phoneNumberField.getText());
             }
         }
     }
