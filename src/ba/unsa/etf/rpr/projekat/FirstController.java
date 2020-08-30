@@ -6,9 +6,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class FirstController {
@@ -61,9 +66,20 @@ public class FirstController {
         else {
             if (kindergartenDAO.loginCheckIfAdmin(usernameField.getText(), passwordField.getText())) {
                 //ovdje otvoriti novi prozor za admina
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("ADMIN");
-                alert.showAndWait();
+                Stage stage = new Stage();
+                Parent root = null;
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/admin.fxml"));
+                AdminController adminController = new AdminController();
+                loader.setController(adminController);
+                try {
+                    root = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                stage.setTitle("Admin");
+                stage.setScene(new Scene(root, 700, 400));
+                stage.setResizable(false);
+                stage.show();
             } else if (kindergartenDAO.loginCheckIfParent(usernameField.getText(), passwordField.getText())) {
                 //ovdje otvoriti novi prozor za roditelja
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
