@@ -82,9 +82,20 @@ public class FirstController {
                 stage.show();
             } else if (kindergartenDAO.loginCheckIfParent(usernameField.getText(), passwordField.getText())) {
                 //ovdje otvoriti novi prozor za roditelja
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("PARENT");
-                alert.showAndWait();
+                Stage stage = new Stage();
+                Parent root = null;
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/parent.fxml"));
+                ParentController parentController = new ParentController();
+                loader.setController(parentController);
+                try {
+                    root = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                stage.setTitle("Parent");
+                stage.setScene(new Scene(root, 700, 400));
+                stage.setResizable(false);
+                stage.show();
             } else {
                 //ovdje otvoriti Alert o neispravnoj prijavi
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -140,10 +151,23 @@ public class FirstController {
             }
             else {
                 //ovdje otvoriti novi prozor za roditelja
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("PARENT");
-                alert.showAndWait();
+                //prije toga dodavanje u bazu
                 kindergartenDAO.addNewParentDB(nameField.getText(), surnameField.getText(), usernameField.getText(), passwordField.getText(), statusBox.getValue().toString(), phoneNumberField.getText());
+
+                Stage stage = new Stage();
+                Parent root = null;
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/parent.fxml"));
+                ParentController parentController = new ParentController();
+                loader.setController(parentController);
+                try {
+                    root = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                stage.setTitle("Parent");
+                stage.setScene(new Scene(root, 700, 400));
+                stage.setResizable(false);
+                stage.show();
             }
         }
     }

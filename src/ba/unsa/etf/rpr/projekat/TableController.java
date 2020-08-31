@@ -3,6 +3,7 @@ package ba.unsa.etf.rpr.projekat;
 import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -42,4 +43,15 @@ public class TableController {
         phoneNumberCol.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
     }
 
+    public void addAction(ActionEvent actionEvent) {
+
+    }
+
+    public void changeAction(ActionEvent actionEvent) {
+
+    }
+
+    public void deleteAction(ActionEvent actionEvent) {
+
+    }
 }

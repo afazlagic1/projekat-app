@@ -40,8 +40,6 @@ public class AdminController {
         stage.setScene(new Scene(root, 700, 400));
         stage.setResizable(false);
         stage.show();
-
-        //stage.setOnHiding();
     }
     public void openClassroomTable(ActionEvent actionEvent) {
 
