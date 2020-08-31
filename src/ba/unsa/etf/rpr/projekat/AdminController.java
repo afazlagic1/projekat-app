@@ -2,8 +2,14 @@ package ba.unsa.etf.rpr.projekat;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class AdminController {
     public Button adminTableBtn;
@@ -20,7 +26,22 @@ public class AdminController {
     }
 
     public void openParentTable(ActionEvent actionEvent) {
+        Stage stage = new Stage();
+        Parent root = null;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/table.fxml"));
+        TableController tableController = new TableController();
+        loader.setController(tableController);
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        stage.setTitle("Parent table");
+        stage.setScene(new Scene(root, 700, 400));
+        stage.setResizable(false);
+        stage.show();
 
+        //stage.setOnHiding();
     }
     public void openClassroomTable(ActionEvent actionEvent) {
 

@@ -1,8 +1,12 @@
 package ba.unsa.etf.rpr.projekat;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class KindergartenDAO {
@@ -160,7 +164,6 @@ public class KindergartenDAO {
     }
 
     public void addNewParentDB(String name, String surname, String username, String password, String maritalStatus, String phoneNumber) {
-        ResultSet resultSet = null;
         try {
             ResultSet set = parentIdMax.executeQuery();
             if(set.next())
@@ -182,4 +185,29 @@ public class KindergartenDAO {
             throwables.printStackTrace();
         }
     }
+
+    public ArrayList<Parent> getAllParentsDB() {
+        ResultSet resultSet = null;
+        ArrayList<Parent> help = new ArrayList<>();
+        try {
+            resultSet = giveParentsStatement.executeQuery();
+            while(resultSet.next()) {
+                help.add(new Parent(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getString(6), resultSet.getInt(7)));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        finally {
+            if(resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+        return help;
+    }
+
+
 }

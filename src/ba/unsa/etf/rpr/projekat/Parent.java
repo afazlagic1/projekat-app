@@ -15,6 +15,21 @@ public class Parent extends User {
         this.status = status;
         this.phoneNumber = phoneNumber;
     }
+
+    public Parent(int id, String name, String surname, String username, String password, String maritalStatus, int phoneNumber) {
+        super(id, name, surname, username, password);
+        this.phoneNumber = phoneNumber;
+        //this.status = MaritalStatus.valueOf(maritalStatus);
+        if(maritalStatus.equalsIgnoreCase("married"))
+            this.status = MaritalStatus.MARRIED;
+        else if(maritalStatus.equalsIgnoreCase("divorced"))
+            this.status = MaritalStatus.DIVORCED;
+        else if(maritalStatus.equalsIgnoreCase("widowed"))
+            this.status = MaritalStatus.WIDOWED;
+        else if(maritalStatus.equalsIgnoreCase("single"))
+            this.status = MaritalStatus.SINGLE;
+    }
+
     public Parent(int id, String name, String surname, String username, String password, MaritalStatus status, int phoneNumber) {
         super(id, name, surname, username, password);
         this.status = status;
