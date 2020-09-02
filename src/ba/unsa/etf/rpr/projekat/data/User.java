@@ -1,4 +1,4 @@
-package ba.unsa.etf.rpr.projekat;
+package ba.unsa.etf.rpr.projekat.data;
 
 import javafx.beans.property.SimpleStringProperty;
 

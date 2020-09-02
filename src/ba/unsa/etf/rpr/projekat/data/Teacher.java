@@ -1,4 +1,6 @@
-package ba.unsa.etf.rpr.projekat;
+package ba.unsa.etf.rpr.projekat.data;
+
+import ba.unsa.etf.rpr.projekat.data.Classroom;
 
 public class Teacher {
     private int id = -1;

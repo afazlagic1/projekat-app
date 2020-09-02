@@ -1,5 +1,6 @@
-package ba.unsa.etf.rpr.projekat;
+package ba.unsa.etf.rpr.projekat.controller;
 
+import ba.unsa.etf.rpr.projekat.data.Admin;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,8 +33,8 @@ public class AdminController {
     public void openParentTable(ActionEvent actionEvent) {
         Stage stage = new Stage();
         Parent root = null;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/table.fxml"));
-        TableController tableController = new TableController();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/parentTable.fxml"));
+        ParentTableController tableController = new ParentTableController();
         loader.setController(tableController);
         try {
             root = loader.load();
@@ -52,7 +53,20 @@ public class AdminController {
 
     }
     public void openAdminTable(ActionEvent actionEvent) {
-
+        Stage stage = new Stage();
+        Parent root = null;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminTable.fxml"));
+        AdminTableController tableController = new AdminTableController();
+        loader.setController(tableController);
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        stage.setTitle("Admin table");
+        stage.setScene(new Scene(root, 700, 400));
+        stage.setResizable(false);
+        stage.show();
     }
     public void openTeacherTable(ActionEvent actionEvent) {
 

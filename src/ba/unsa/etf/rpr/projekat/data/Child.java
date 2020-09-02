@@ -1,4 +1,6 @@
-package ba.unsa.etf.rpr.projekat;
+package ba.unsa.etf.rpr.projekat.data;
+
+import ba.unsa.etf.rpr.projekat.InvalidYearsOldException;
 
 public class Child {
     private int id = -1;

@@ -1,5 +1,9 @@
 package ba.unsa.etf.rpr.projekat;
 
+import ba.unsa.etf.rpr.projekat.data.Admin;
+import ba.unsa.etf.rpr.projekat.data.Classroom;
+import ba.unsa.etf.rpr.projekat.data.Parent;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.*;
@@ -320,5 +324,28 @@ public class KindergartenDAO {
             s.printStackTrace();
         }
         return admin;
+    }
+
+    public ArrayList<Admin> getAllAdminsDB() {
+        ResultSet resultSet = null;
+        ArrayList<Admin> help = new ArrayList<>();
+        try {
+            resultSet = giveAdminsStatement.executeQuery();
+            while(resultSet.next()) {
+                help.add(new Admin(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5)));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        finally {
+            if(resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+        return help;
     }
 }

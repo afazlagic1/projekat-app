@@ -1,5 +1,8 @@
-package ba.unsa.etf.rpr.projekat;
+package ba.unsa.etf.rpr.projekat.controller;
 
+import ba.unsa.etf.rpr.projekat.*;
+import ba.unsa.etf.rpr.projekat.data.Admin;
+import ba.unsa.etf.rpr.projekat.data.MaritalStatus;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -86,7 +89,7 @@ public class FirstController {
             } else if (kindergartenDAO.loginCheckIfParent(usernameField.getText(), passwordField.getText())) {
                 //ovdje otvoriti novi prozor za roditelja
 
-                ba.unsa.etf.rpr.projekat.Parent parent = kindergartenDAO.getParentByUsername(usernameField.getText(), passwordField.getText());
+                ba.unsa.etf.rpr.projekat.data.Parent parent = kindergartenDAO.getParentByUsername(usernameField.getText(), passwordField.getText());
 
                 Stage stage = new Stage();
                 Parent root = null;
@@ -158,7 +161,7 @@ public class FirstController {
             else {
                 //ovdje otvoriti novi prozor za roditelja
                 //prije toga dodavanje u bazu
-                ba.unsa.etf.rpr.projekat.Parent parent = kindergartenDAO.addNewParentDB(nameField.getText(), surnameField.getText(), usernameField.getText(), passwordField.getText(), statusBox.getValue().toString(), phoneNumberField.getText());
+                ba.unsa.etf.rpr.projekat.data.Parent parent = kindergartenDAO.addNewParentDB(nameField.getText(), surnameField.getText(), usernameField.getText(), passwordField.getText(), statusBox.getValue().toString(), phoneNumberField.getText());
 
                 Stage stage = new Stage();
                 Parent root = null;

@@ -1,5 +1,7 @@
-package ba.unsa.etf.rpr.projekat;
+package ba.unsa.etf.rpr.projekat.controller;
 
+import ba.unsa.etf.rpr.projekat.KindergartenDAO;
+import ba.unsa.etf.rpr.projekat.data.Parent;
 import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,7 +12,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class TableController {
+public class ParentTableController {
     public TableView parentTableView;
     public Button addBtn;
     public Button changeBtn;
@@ -27,7 +29,7 @@ public class TableController {
     private ObservableObjectValue<Parent> parent;
 
 
-    public TableController() {
+    public ParentTableController() {
 
     }
 

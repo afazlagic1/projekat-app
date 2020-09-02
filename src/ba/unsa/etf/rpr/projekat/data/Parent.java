@@ -1,4 +1,4 @@
-package ba.unsa.etf.rpr.projekat;
+package ba.unsa.etf.rpr.projekat.data;
 
 public class Parent extends User {
     private MaritalStatus status;

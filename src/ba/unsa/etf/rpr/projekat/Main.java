@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.projekat;
 
+import ba.unsa.etf.rpr.projekat.controller.FirstController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
