@@ -48,7 +48,7 @@
             <Label prefHeight="29.0" prefWidth="64.0" text="Name:" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <Label prefHeight="29.0" prefWidth="64.0" text="Surname:" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
             <Label prefHeight="29.0" prefWidth="64.0" text="Years old:" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-            <Button fx:id="registerBtn" mnemonicParsing="false" prefHeight="47.0" prefWidth="111.0" text="REGISTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+            <Button fx:id="registerBtn" mnemonicParsing="false" onAction="#registerAction" prefHeight="47.0" prefWidth="111.0" text="REGISTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="10.0" top="5.0" />
                </GridPane.margin>

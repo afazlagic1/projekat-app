@@ -13,6 +13,12 @@ public class ParentController {
     public TextField nameF;
     public TextField surnameF;
     public TextField yoF;
+    private KindergartenDAO kindergartenDAO = KindergartenDAO.getInstance();
+    private Parent parent;
+
+    public ParentController(Parent parent) {
+        this.parent = parent;
+    }
 
     @FXML
     public void initialize() {
@@ -38,17 +44,21 @@ public class ParentController {
         }
         else if(yoF.getText().equals("")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Please enter the surname of your child. :)");
+            alert.setContentText("Please enter how old is your child. :)");
             alert.showAndWait();
         }
-        else if(!yoF.getText().equals("1") && !yoF.getText().equals("2") && !yoF.getText().equals("3") && !yoF.getText().equals("4") && yoF.getText().equals("5") && yoF.getText().equals("6")) {
+        else if(!(Integer.parseInt(yoF.getText()) >= 1 && Integer.parseInt(yoF.getText()) <= 6)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("The years range for children is from 1 to 6. :)");
             alert.showAndWait();
         }
         else {
             //registrovati i dodati dijete u novi razred
-
+            System.out.println(parent.toString());
+            kindergartenDAO.addNewChildDB(parent, nameF.getText(), surnameF.getText(), Integer.parseInt(yoF.getText()));
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("You sucessfully registered your child!");
+            alert.showAndWait();
         }
     }
 }

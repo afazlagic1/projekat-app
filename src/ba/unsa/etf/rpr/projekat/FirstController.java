@@ -82,10 +82,13 @@ public class FirstController {
                 stage.show();
             } else if (kindergartenDAO.loginCheckIfParent(usernameField.getText(), passwordField.getText())) {
                 //ovdje otvoriti novi prozor za roditelja
+
+                ba.unsa.etf.rpr.projekat.Parent parent = kindergartenDAO.getParentByUsername(usernameField.getText(), passwordField.getText());
+
                 Stage stage = new Stage();
                 Parent root = null;
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/parent.fxml"));
-                ParentController parentController = new ParentController();
+                ParentController parentController = new ParentController(parent);
                 loader.setController(parentController);
                 try {
                     root = loader.load();
@@ -152,12 +155,12 @@ public class FirstController {
             else {
                 //ovdje otvoriti novi prozor za roditelja
                 //prije toga dodavanje u bazu
-                kindergartenDAO.addNewParentDB(nameField.getText(), surnameField.getText(), usernameField.getText(), passwordField.getText(), statusBox.getValue().toString(), phoneNumberField.getText());
+                ba.unsa.etf.rpr.projekat.Parent parent = kindergartenDAO.addNewParentDB(nameField.getText(), surnameField.getText(), usernameField.getText(), passwordField.getText(), statusBox.getValue().toString(), phoneNumberField.getText());
 
                 Stage stage = new Stage();
                 Parent root = null;
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/parent.fxml"));
-                ParentController parentController = new ParentController();
+                ParentController parentController = new ParentController(parent);
                 loader.setController(parentController);
                 try {
                     root = loader.load();

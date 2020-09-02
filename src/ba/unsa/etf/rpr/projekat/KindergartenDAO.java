@@ -1,8 +1,5 @@
 package ba.unsa.etf.rpr.projekat;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.*;
@@ -13,7 +10,7 @@ public class KindergartenDAO {
     private static KindergartenDAO instance;
     private Connection connection;
     private PreparedStatement giveAdminsStatement, giveParentsStatement, giveAdminStatement, giveAdminByIdStatement, giveParentStatement, giveParentByIdStatement, checkIfUsernameTakenAdminStatement, checkIfUsernameTakenParentStatement, insertNewParentStatement,
-    parentIdMax;
+            insertNewChildStatement, insertNewClassroomStatement, parentIdMax, childIdMax, classroomMaxId, findFreeClassroomStatement, changeClassroomStatement;
 
     public static KindergartenDAO getInstance() {
         if(instance == null)
@@ -48,7 +45,13 @@ public class KindergartenDAO {
                 giveParentStatement = connection.prepareStatement("SELECT parent.id, parent.name, parent.surname, parent.username, parent.password, parent.status, parent.phoneNumber FROM parent WHERE parent.username=? AND parent.password=?");
                 giveParentByIdStatement = connection.prepareStatement("SELECT parent.id, parent.name, parent.surname, parent.username, parent.password, parent.status, parent.phoneNumber FROM parent WHERE parent.id=?");
                 insertNewParentStatement = connection.prepareStatement("INSERT INTO parent VALUES (?,?,?,?,?,?,?)");
+                insertNewChildStatement = connection.prepareStatement("INSERT INTO child VALUES (?,?,?,?,?,?,?)");
+                insertNewClassroomStatement = connection.prepareStatement("INSERT INTO classroom VALUES(?,?,?)");
                 parentIdMax = connection.prepareStatement("SELECT MAX(id)+1 FROM parent");
+                childIdMax = connection.prepareStatement("SELECT MAX(id)+1 FROM child");
+                classroomMaxId = connection.prepareStatement("SELECT MAX(id)+1 FROM classroom");
+                findFreeClassroomStatement = connection.prepareStatement("SELECT classroom.id, classroom.children, classroom.teacher FROM classroom WHERE (length(classroom.children)/2)<"+String.valueOf(Classroom.getCapacity()));
+                changeClassroomStatement = connection.prepareStatement("UPDATE classroom SET children=? WHERE id=?");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -163,13 +166,19 @@ public class KindergartenDAO {
         }
     }
 
-    public void addNewParentDB(String name, String surname, String username, String password, String maritalStatus, String phoneNumber) {
+    public Parent addNewParentDB(String name, String surname, String username, String password, String maritalStatus, String phoneNumber) {
+        Parent parent = null;
+        int id = -1;
         try {
             ResultSet set = parentIdMax.executeQuery();
-            if(set.next())
+            if(set.next()) {
                 insertNewParentStatement.setInt(1, set.getInt(1));
-            else
+                id = set.getInt(1);
+            }
+            else {
                 insertNewParentStatement.setInt(1, 1);
+                id = 1;
+            }
             insertNewParentStatement.setString(2, name);
             insertNewParentStatement.setString(3, surname);
             insertNewParentStatement.setString(4, username);
@@ -181,9 +190,11 @@ public class KindergartenDAO {
         }
         try {
             insertNewParentStatement.executeUpdate();
+            parent = new Parent(id, name, surname, username, password, maritalStatus, Integer.valueOf(phoneNumber));
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        return parent;
     }
 
     public ArrayList<Parent> getAllParentsDB() {
@@ -209,5 +220,91 @@ public class KindergartenDAO {
         return help;
     }
 
+
+    public void addNewChildDB(Parent parent, String name, String surname, int yo) {
+        ResultSet resultSet, resultSet1;
+        int childId = -1;
+        try {
+            resultSet = childIdMax.executeQuery();
+            if (resultSet.next()) {
+                insertNewChildStatement.setInt(1, resultSet.getInt(1));
+                childId = resultSet.getInt(1);
+                System.out.println("child id: " + childId + " " + name + " " + surname);
+            }
+            else {
+                insertNewChildStatement.setInt(1, 1);
+                childId = 1;
+            }
+            insertNewChildStatement.setString(2, name);
+            insertNewChildStatement.setString(3, surname);
+            insertNewChildStatement.setInt(4, parent.getId());
+            insertNewChildStatement.setObject(5, null);
+            insertNewChildStatement.setInt(6, yo);
+
+            //pronaći classroom
+            resultSet1 = findFreeClassroomStatement.executeQuery();
+            if(resultSet1.next()) {
+                insertNewChildStatement.setInt(7, resultSet1.getInt(1));
+                addChildToClassroom(resultSet1.getInt(1), childId, resultSet1.getString(2));
+
+                insertNewChildStatement.executeUpdate();
+            }
+            else {
+                int classroomId = addNewClassroomDB();
+                insertNewChildStatement.setInt(7, classroomId);
+
+                insertNewChildStatement.executeUpdate();
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private int addNewClassroomDB() {
+        int id = -1;
+        try {
+            ResultSet resultSet = classroomMaxId.executeQuery();
+            if (resultSet.next()) {
+                insertNewClassroomStatement.setInt(1, resultSet.getInt(1));
+                id = resultSet.getInt(1);
+            } else {
+                insertNewClassroomStatement.setInt(1, 1);
+                id = 1;
+            }
+            insertNewClassroomStatement.setString(2, "");
+            insertNewClassroomStatement.setInt(3, 1); //TODO koja uciteljica se dodjeljuje
+            insertNewClassroomStatement.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
+
+    private void addChildToClassroom(int classroomId, int childId, String childrenList) {
+        try {
+            changeClassroomStatement.setString(1, childrenList + childId + ",");
+            changeClassroomStatement.setInt(2, classroomId);
+            changeClassroomStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public Parent getParentByUsername(String username, String password) {
+        Parent parent = null;
+        try {
+
+        giveParentStatement.setString(1, username);
+        giveParentStatement.setString(2, password);
+        ResultSet resultSet = giveParentStatement.executeQuery();
+        parent = new Parent(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getString(6), resultSet.getInt(7));
+        }
+        catch (SQLException s) {
+            s.printStackTrace();
+        }
+        return parent;
+    }
 
 }

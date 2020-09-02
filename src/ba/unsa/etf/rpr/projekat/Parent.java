@@ -51,4 +51,9 @@ public class Parent extends User {
     public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
+    @Override
+    public String toString() {
+        return super.getName() + " " + super.getSurname() + ", id: " + super.getId();
+    }
 }
