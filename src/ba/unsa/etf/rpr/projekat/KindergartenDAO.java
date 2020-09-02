@@ -307,4 +307,18 @@ public class KindergartenDAO {
         return parent;
     }
 
+    public Admin getAdminByUsername(String username, String password) {
+        Admin admin = null;
+        try {
+
+            giveAdminStatement.setString(1, username);
+            giveAdminStatement.setString(2, password);
+            ResultSet resultSet = giveAdminStatement.executeQuery();
+            admin = new Admin(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5));
+        }
+        catch (SQLException s) {
+            s.printStackTrace();
+        }
+        return admin;
+    }
 }

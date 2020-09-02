@@ -20,9 +20,13 @@ public class AdminController {
     public Label labelWelcomeAdmin;
     private Admin activeAdmin;
 
+    public AdminController(Admin admin) {
+        activeAdmin = admin;
+    }
+
     @FXML
     public void initialize() {
-        labelWelcomeAdmin.setText("Welcome back admin.");
+        labelWelcomeAdmin.setText("Welcome back, " + activeAdmin.toString());
     }
 
     public void openParentTable(ActionEvent actionEvent) {

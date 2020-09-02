@@ -66,10 +66,13 @@ public class FirstController {
         else {
             if (kindergartenDAO.loginCheckIfAdmin(usernameField.getText(), passwordField.getText())) {
                 //ovdje otvoriti novi prozor za admina
+
+                Admin admin = kindergartenDAO.getAdminByUsername(usernameField.getText(), passwordField.getText());
+
                 Stage stage = new Stage();
                 Parent root = null;
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/admin.fxml"));
-                AdminController adminController = new AdminController();
+                AdminController adminController = new AdminController(admin);
                 loader.setController(adminController);
                 try {
                     root = loader.load();
