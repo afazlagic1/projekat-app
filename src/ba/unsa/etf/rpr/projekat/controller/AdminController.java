@@ -63,7 +63,20 @@ public class AdminController {
         stage.show();
     }
     public void openChildTable(ActionEvent actionEvent) {
-
+        Stage stage = new Stage();
+        Parent root = null;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/childTable.fxml"));
+        ChildTableController tableController = new ChildTableController();
+        loader.setController(tableController);
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        stage.setTitle("Child table");
+        stage.setScene(new Scene(root, 700, 400));
+        stage.setResizable(false);
+        stage.show();
     }
     public void openAdminTable(ActionEvent actionEvent) {
         Stage stage = new Stage();

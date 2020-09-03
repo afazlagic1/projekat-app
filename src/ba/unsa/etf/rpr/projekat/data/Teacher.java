@@ -24,10 +24,7 @@ public class Teacher {
 
     @Override
     public String toString() {
-        return "Teacher{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                '}';
+        return name.getValue() + " " + surname.getValue();
     }
 
     public Teacher(int id, String name, String surname, int phoneNumber) {
