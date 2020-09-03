@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class KindergartenDAO {
     private static KindergartenDAO instance;
     private Connection connection;
-    private PreparedStatement giveAdminsStatement, giveParentsStatement, giveClassroomsStatement, giveAdminStatement, giveAdminByIdStatement, giveTeacherByIdStatement, giveParentStatement, giveParentByIdStatement,giveChildByIdStatement, checkIfUsernameTakenAdminStatement, checkIfUsernameTakenParentStatement, insertNewParentStatement,
+    private PreparedStatement giveAdminsStatement, giveParentsStatement, giveClassroomsStatement, giveAdminStatement, giveAdminByIdStatement, giveTeacherByIdStatement, giveClassroomByIdStatement, giveParentStatement, giveParentByIdStatement,giveChildByIdStatement, checkIfUsernameTakenAdminStatement, checkIfUsernameTakenParentStatement, insertNewParentStatement,
             insertNewChildStatement, insertNewClassroomStatement, parentIdMax, childIdMax, classroomMaxId, findFreeClassroomStatement, changeClassroomStatement;
 
     public static KindergartenDAO getInstance() {
@@ -42,6 +42,7 @@ public class KindergartenDAO {
                 giveAdminStatement = connection.prepareStatement("SELECT admin.id, admin.name, admin.surname, admin.username, admin.password FROM admin WHERE admin.username=? AND admin.password=?");
                 giveAdminByIdStatement = connection.prepareStatement("SELECT admin.id, admin.name, admin.surname, admin.username, admin.password FROM admin WHERE admin.id=?");
                 giveTeacherByIdStatement = connection.prepareStatement("SELECT teacher.id, teacher.name, teacher.surname, teacher.phoneNumber FROM teacher WHERE teacher.id=?");
+                giveClassroomByIdStatement = connection.prepareStatement("SELECT classroom.id, classroom.children, classroom.teacher FROM classroom WHERE classroom.id=?");
                 checkIfUsernameTakenAdminStatement = connection.prepareStatement("SELECT admin.id, admin.name, admin.surname, admin.username, admin.password FROM admin WHERE admin.username=?");
                 checkIfUsernameTakenParentStatement = connection.prepareStatement("SELECT parent.id, parent.name, parent.surname, parent.username, parent.password, parent.status, parent.phoneNumber FROM parent WHERE parent.username=?");
                 giveParentsStatement = connection.prepareStatement("SELECT parent.id, parent.name, parent.surname, parent.username, parent.password, parent.status, parent.phoneNumber FROM parent");
@@ -358,7 +359,8 @@ public class KindergartenDAO {
             while(resultSet.next()) {
                 ArrayList<Child> childArrayList = getAllChildrenDBByIds(resultSet.getString(2));
                 Teacher teacher = getTeacherById(resultSet.getInt(3));
-                help.add(new Classroom(resultSet.getInt(1), childArrayList, teacher));
+                Classroom classroom = new Classroom(resultSet.getInt(1), childArrayList, teacher);
+                help.add(classroom);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -405,6 +407,7 @@ public class KindergartenDAO {
 
     private Child getChildByIdDB(int id) {
         Child child = null;
+        System.out.println("child id: " + id);
         ResultSet resultSet;
         try {
             giveChildByIdStatement.setInt(1, id);
@@ -412,17 +415,35 @@ public class KindergartenDAO {
             if (resultSet.next()) {
                 Parent parent1 = null;
                 Parent parent2 = null;
+                Classroom classroom = null;
                 if(resultSet.getObject(4) != null)
                     parent1 = getParentById(resultSet.getInt(4));
                 if(resultSet.getObject(5) != null)
-                    parent2 = getParentById(resultSet.getInt(5));
-                child = new Child(id, resultSet.getString(2), resultSet.getString(3), null, null, resultSet.getInt(6), null);
+                    parent2 = getParentById(resultSet.getInt(5));/*
+                if(resultSet.getObject(7) != null)
+                    classroom = getClassroomById(resultSet.getInt(7));*/
+                child = new Child(id, resultSet.getString(2), resultSet.getString(3), parent1, parent2, resultSet.getInt(6), null);
             }
         }
         catch (SQLException | InvalidYearsOldException s) {
             s.printStackTrace();
         }
         return child;
+    }
+
+    private Classroom getClassroomById(int id) {
+        Classroom classroom = null;
+        ResultSet resultSet;
+        try {
+            giveClassroomByIdStatement.setInt(1, id);
+            resultSet = giveClassroomByIdStatement.executeQuery();
+            classroom = new Classroom(id, getAllChildrenDBByIds(resultSet.getString(2)), getTeacherById(resultSet.getInt(3)));
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return classroom;
     }
 
     private Parent getParentById(int id) {
