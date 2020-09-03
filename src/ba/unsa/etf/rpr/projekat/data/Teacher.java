@@ -1,6 +1,8 @@
 package ba.unsa.etf.rpr.projekat.data;
 
 import ba.unsa.etf.rpr.projekat.data.Classroom;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 
 public class Teacher {
     private int id = -1;
@@ -13,61 +15,61 @@ public class Teacher {
         this.id = id;
     }
 
-    private String name = "";
-    private String surname = "";
-    private String username = "";
-    private int phoneNumber = 0;
-    private Classroom classroom = null;
+    private SimpleStringProperty name = new SimpleStringProperty("");
+    private SimpleStringProperty surname = new SimpleStringProperty("");
+    private SimpleIntegerProperty phoneNumber = new SimpleIntegerProperty(0);
 
     public Teacher() {
     }
 
-    public Teacher(int id, String name, String surname, String email, int phoneNumber, Classroom classroom) {
+    @Override
+    public String toString() {
+        return "Teacher{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                '}';
+    }
+
+    public Teacher(int id, String name, String surname, int phoneNumber) {
         this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.username = email;
-        this.phoneNumber = phoneNumber;
-        this.classroom = classroom;
+        this.name = new SimpleStringProperty(name);
+        this.surname = new SimpleStringProperty(surname);
+        this.phoneNumber = new SimpleIntegerProperty(phoneNumber);
     }
 
     public String getName() {
+        return name.get();
+    }
+
+    public SimpleStringProperty nameProperty() {
         return name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name.set(name);
     }
 
     public String getSurname() {
+        return surname.get();
+    }
+
+    public SimpleStringProperty surnameProperty() {
         return surname;
     }
 
     public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
+        this.surname.set(surname);
     }
 
     public int getPhoneNumber() {
+        return phoneNumber.get();
+    }
+
+    public SimpleIntegerProperty phoneNumberProperty() {
         return phoneNumber;
     }
 
     public void setPhoneNumber(int phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public Classroom getClassroom() {
-        return classroom;
-    }
-
-    public void setClassroom(Classroom classroom) {
-        this.classroom = classroom;
+        this.phoneNumber.set(phoneNumber);
     }
 }

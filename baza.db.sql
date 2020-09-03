@@ -37,9 +37,7 @@ CREATE TABLE IF NOT EXISTS "teacher" (
 	"id"	INTEGER,
 	"name"	TEXT,
 	"surname"	TEXT,
-	"username"	TEXT,
 	"phoneNumber"	INTEGER,
-	"classroom"	INTEGER,
 	PRIMARY KEY("id")
 );
 INSERT INTO "child" VALUES (1,'Patrick','West',3,5,3,1);
@@ -53,5 +51,5 @@ INSERT INTO "parent" VALUES (2,'Natasha','Dawson','nata15','1111','married',132)
 INSERT INTO "parent" VALUES (3,'Anna','West','annaw','2222','divorced',342);
 INSERT INTO "parent" VALUES (4,'Theo','Bailey','tb68','3333','married',3123);
 INSERT INTO "parent" VALUES (5,'Peter','West','peterw','4444','married',667);
-INSERT INTO "teacher" VALUES (1,'Lea','Black','lea',9871,1);
+INSERT INTO "teacher" VALUES (1,'Lea','Black',9871);
 COMMIT;

@@ -11,6 +11,14 @@ public class Child {
     private int yo;
     private Classroom classroom;
 
+    @Override
+    public String toString() {
+        return "Child{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                '}' + "\n";
+    }
+
     public Child() {
         name = "";
         surname = "";

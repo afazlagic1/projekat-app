@@ -6,7 +6,7 @@ import java.util.List;
 public class Classroom {
     private int id = -1;
     private List<Child> children = new ArrayList<>();
-    private Teacher teacher = null;
+    private Teacher teacher = new Teacher();
     private static int capacity = 15;
 
     public Classroom(int id, List<Child> children, Teacher teacher) {
