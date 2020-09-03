@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
     <center>
         <TableView fx:id="classroomTableView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <columns>
-                <TableColumn fx:id="idCol" prefWidth="44.0" text="id" />
-                <TableColumn fx:id="childrenCol" prefWidth="64.0" text="children" />
-                <TableColumn fx:id="teacherCol" prefWidth="81.0" text="teacher" />
+                <TableColumn fx:id="idCol" prefWidth="59.0" text="id" />
+                <TableColumn fx:id="childrenCol" prefWidth="359.0" text="children" />
+                <TableColumn fx:id="teacherCol" prefWidth="104.0" text="teacher" />
             </columns>
         </TableView>
     </center>
@@ -40,7 +35,7 @@
         </VBox>
     </left>
     <top>
-        <Label text="Parents" BorderPane.alignment="CENTER">
+        <Label text="Classroom" BorderPane.alignment="CENTER">
             <BorderPane.margin>
                 <Insets bottom="10.0" top="10.0" />
             </BorderPane.margin>

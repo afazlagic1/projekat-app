@@ -49,9 +49,9 @@ public class KindergartenDAO {
                 giveClassroomsStatement = connection.prepareStatement("SELECT classroom.id, classroom.children, classroom.teacher FROM classroom");
                 giveParentStatement = connection.prepareStatement("SELECT parent.id, parent.name, parent.surname, parent.username, parent.password, parent.status, parent.phoneNumber FROM parent WHERE parent.username=? AND parent.password=?");
                 giveParentByIdStatement = connection.prepareStatement("SELECT parent.id, parent.name, parent.surname, parent.username, parent.password, parent.status, parent.phoneNumber FROM parent WHERE parent.id=?");
-                giveChildByIdStatement = connection.prepareStatement("SELECT child.id, child.name, child.surname, child.parent1, child.parent2, child.yo, child.classroom FROM child WHERE child.id=?");
+                giveChildByIdStatement = connection.prepareStatement("SELECT child.id, child.name, child.surname, child.parent1, child.yo, child.classroom FROM child WHERE child.id=?");
                 insertNewParentStatement = connection.prepareStatement("INSERT INTO parent VALUES (?,?,?,?,?,?,?)");
-                insertNewChildStatement = connection.prepareStatement("INSERT INTO child VALUES (?,?,?,?,?,?,?)");
+                insertNewChildStatement = connection.prepareStatement("INSERT INTO child VALUES (?,?,?,?,?,?)");
                 insertNewClassroomStatement = connection.prepareStatement("INSERT INTO classroom VALUES(?,?,?)");
                 parentIdMax = connection.prepareStatement("SELECT MAX(id)+1 FROM parent");
                 childIdMax = connection.prepareStatement("SELECT MAX(id)+1 FROM child");
@@ -417,12 +417,10 @@ public class KindergartenDAO {
                 Parent parent2 = null;
                 Classroom classroom = null;
                 if(resultSet.getObject(4) != null)
-                    parent1 = getParentById(resultSet.getInt(4));
-                if(resultSet.getObject(5) != null)
-                    parent2 = getParentById(resultSet.getInt(5));/*
+                    parent1 = getParentById(resultSet.getInt(4));/*
                 if(resultSet.getObject(7) != null)
                     classroom = getClassroomById(resultSet.getInt(7));*/
-                child = new Child(id, resultSet.getString(2), resultSet.getString(3), parent1, parent2, resultSet.getInt(6), null);
+                child = new Child(id, resultSet.getString(2), resultSet.getString(3), parent1, resultSet.getInt(6), null);
             }
         }
         catch (SQLException | InvalidYearsOldException s) {

@@ -4,7 +4,6 @@ CREATE TABLE IF NOT EXISTS "child" (
 	"name"	TEXT,
 	"surname"	TEXT,
 	"parent1"	INTEGER,
-	"parent2"	INTEGER,
 	"yo"	INTEGER,
 	"classroom"	INTEGER,
 	PRIMARY KEY("id")
@@ -40,10 +39,10 @@ CREATE TABLE IF NOT EXISTS "teacher" (
 	"phoneNumber"	INTEGER,
 	PRIMARY KEY("id")
 );
-INSERT INTO "child" VALUES (1,'Patrick','West',3,5,3,1);
-INSERT INTO "child" VALUES (2,'Mary','Nielsen',1,NULL,5,1);
-INSERT INTO "child" VALUES (3,'Sam','Dawson',2,NULL,5,1);
-INSERT INTO "child" VALUES (4,'Diana','Bailey',4,NULL,4,1);
+INSERT INTO "child" VALUES (1,'Patrick','West',3,3,1);
+INSERT INTO "child" VALUES (2,'Mary','Nielsen',1,5,1);
+INSERT INTO "child" VALUES (3,'Sam','Dawson',2,5,1);
+INSERT INTO "child" VALUES (4,'Diana','Bailey',4,4,1);
 INSERT INTO "classroom" VALUES (1,'1,2,3,4,',1);
 INSERT INTO "admin" VALUES (1,'Anesa','Fazlagić','afazlagic1','123');
 INSERT INTO "parent" VALUES (1,'Dominik','Nielsen','dino1921','0000','married',13213);

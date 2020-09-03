@@ -7,7 +7,6 @@ public class Child {
     private String name;
     private String surname;
     private Parent parent1;
-    private Parent parent2;
     private int yo;
     private Classroom classroom;
 
@@ -23,19 +22,17 @@ public class Child {
         name = "";
         surname = "";
         parent1 = null;
-        parent2 = null;
         yo = 0;
         classroom = null;
     }
 
-    public Child(int id, String name, String surname, Parent parent1, Parent parent2, int yo, Classroom classroom) throws InvalidYearsOldException {
+    public Child(int id, String name, String surname, Parent parent1, int yo, Classroom classroom) throws InvalidYearsOldException {
         if(!(yo >= 1 && yo <= 6))
             throw new InvalidYearsOldException("Invalid yo entry for the child.");
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.parent1 = parent1;
-        this.parent2 = parent2;
         this.yo = yo;
         this.classroom = classroom;
     }
@@ -78,14 +75,6 @@ public class Child {
 
     public void setParent1(Parent parent1) {
         this.parent1 = parent1;
-    }
-
-    public Parent getParent2() {
-        return parent2;
-    }
-
-    public void setParent2(Parent parent2) {
-        this.parent2 = parent2;
     }
 
     public Classroom getClassroom() {
