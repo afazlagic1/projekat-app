@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class KindergartenDAO {
     private static KindergartenDAO instance;
     private Connection connection;
-    private PreparedStatement giveAdminsStatement, giveParentsStatement, giveClassroomsStatement, giveChildrenStatement, giveAdminStatement, giveAdminByIdStatement, giveTeacherByIdStatement, giveClassroomByIdStatement, giveParentStatement, giveParentByIdStatement,giveChildByIdStatement, checkIfUsernameTakenAdminStatement, checkIfUsernameTakenParentStatement, insertNewParentStatement,
+    private PreparedStatement giveAdminsStatement, giveParentsStatement, giveClassroomsStatement, giveChildrenStatement, giveTeachersStatement, giveAdminStatement, giveAdminByIdStatement, giveTeacherByIdStatement, giveClassroomByIdStatement, giveParentStatement, giveParentByIdStatement,giveChildByIdStatement, checkIfUsernameTakenAdminStatement, checkIfUsernameTakenParentStatement, insertNewParentStatement,
             insertNewChildStatement, insertNewClassroomStatement, parentIdMax, childIdMax, classroomMaxId, findFreeClassroomStatement, changeClassroomStatement;
 
     public static KindergartenDAO getInstance() {
@@ -48,6 +48,7 @@ public class KindergartenDAO {
                 giveParentsStatement = connection.prepareStatement("SELECT parent.id, parent.name, parent.surname, parent.username, parent.password, parent.status, parent.phoneNumber FROM parent");
                 giveClassroomsStatement = connection.prepareStatement("SELECT classroom.id, classroom.children, classroom.teacher FROM classroom");
                 giveChildrenStatement = connection.prepareStatement("SELECT child.id, child.name, child.surname, child.parent1, child.yo, child.classroom FROM child");
+                giveTeachersStatement = connection.prepareStatement("SELECT teacher.id, teacher.name, teacher.surname, teacher.phoneNumber FROM teacher");
                 giveParentStatement = connection.prepareStatement("SELECT parent.id, parent.name, parent.surname, parent.username, parent.password, parent.status, parent.phoneNumber FROM parent WHERE parent.username=? AND parent.password=?");
                 giveParentByIdStatement = connection.prepareStatement("SELECT parent.id, parent.name, parent.surname, parent.username, parent.password, parent.status, parent.phoneNumber FROM parent WHERE parent.id=?");
                 giveChildByIdStatement = connection.prepareStatement("SELECT child.id, child.name, child.surname, child.parent1, child.yo, child.classroom FROM child WHERE child.id=?");
@@ -476,5 +477,21 @@ public class KindergartenDAO {
             e.printStackTrace();
         }
         return children;
+    }
+
+    public ArrayList<Teacher> getAllTeachersDB() {
+        ArrayList<Teacher> teachers = new ArrayList<>();
+        ResultSet resultSet;
+        try {
+            resultSet = giveTeachersStatement.executeQuery();
+            while(resultSet.next()) {
+                Teacher teacher = new Teacher(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getInt(4));
+                teachers.add(teacher);
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return teachers;
     }
 }

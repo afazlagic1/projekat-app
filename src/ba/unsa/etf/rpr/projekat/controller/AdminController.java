@@ -95,7 +95,20 @@ public class AdminController {
         stage.show();
     }
     public void openTeacherTable(ActionEvent actionEvent) {
-
+        Stage stage = new Stage();
+        Parent root = null;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/teacherTable.fxml"));
+        TeacherTableController tableController = new TeacherTableController();
+        loader.setController(tableController);
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        stage.setTitle("Teacher table");
+        stage.setScene(new Scene(root, 700, 400));
+        stage.setResizable(false);
+        stage.show();
     }
 
 }

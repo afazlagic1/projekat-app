@@ -64,7 +64,7 @@
       </GridPane>
    </center>
    <left>
-      <ImageView fitHeight="150.0" fitWidth="139.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+      <ImageView fitHeight="150.0" fitWidth="148.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
    </left>
    <right>
       <Label alignment="CENTER" prefHeight="464.0" prefWidth="83.0" text="In case of LOGIN, you can fill out ONLY Username and Password fields!" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">

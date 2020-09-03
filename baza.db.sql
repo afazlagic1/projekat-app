@@ -51,4 +51,5 @@ INSERT INTO "parent" VALUES (3,'Anna','West','annaw','2222','divorced',342);
 INSERT INTO "parent" VALUES (4,'Theo','Bailey','tb68','3333','married',3123);
 INSERT INTO "parent" VALUES (5,'Peter','West','peterw','4444','married',667);
 INSERT INTO "teacher" VALUES (1,'Lea','Black',9871);
+INSERT INTO "teacher" VALUES (2,'Mark','Wolf',1246);
 COMMIT;
