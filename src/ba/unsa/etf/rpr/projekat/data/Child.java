@@ -12,17 +12,14 @@ public class Child {
 
     @Override
     public String toString() {
-        return "Child{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                '}' + "\n";
+        return name + " " + surname + "\n";
     }
 
     public Child() {
         name = "";
         surname = "";
         parent1 = null;
-        yo = 0;
+        yo = 1;
         classroom = null;
     }
 
@@ -65,7 +62,9 @@ public class Child {
         return yo;
     }
 
-    public void setYo(int yo) {
+    public void setYo(int yo) throws InvalidYearsOldException {
+        if(!(yo >= 1 && yo <= 6))
+            throw new InvalidYearsOldException("Invalid yo entry for the child.");
         this.yo = yo;
     }
 
