@@ -56,6 +56,8 @@ public class Classroom {
     }
 
     public static void setCapacity(int capacity) {
+        if(capacity < getCapacity())
+            throw new ArrayIndexOutOfBoundsException("It is not allowed to make the capacity smaller, because the transfer in some classrooms would possibly be necessary in that case.");
         Classroom.capacity = capacity;
     }
 }
