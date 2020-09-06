@@ -3,40 +3,21 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
     <center>
         <TableView fx:id="parentTableView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <columns>
                 <TableColumn fx:id="idCol" prefWidth="44.0" text="id" />
-                <TableColumn fx:id="nameCol" prefWidth="64.0" text="name" />
-                <TableColumn fx:id="surnameCol" prefWidth="81.0" text="surname" />
-                <TableColumn fx:id="parent1Col" prefWidth="87.0" text="parent1" />
-                <TableColumn fx:id="yoCol" prefWidth="103.0" text="yo" />
-                <TableColumn fx:id="classroomCol" prefWidth="143.0" text="teacher" />
+                <TableColumn fx:id="nameCol" prefWidth="96.0" text="name" />
+                <TableColumn fx:id="surnameCol" prefWidth="103.0" text="surname" />
+                <TableColumn fx:id="parent1Col" prefWidth="141.0" text="parent1" />
+                <TableColumn fx:id="yoCol" prefWidth="63.0" text="yo" />
+                <TableColumn fx:id="classroomCol" prefWidth="152.0" text="teacher" />
             </columns>
         </TableView>
     </center>
-    <left>
-        <VBox prefHeight="398.0" prefWidth="77.0" BorderPane.alignment="CENTER">
-            <children>
-                <Button fx:id="addBtn" mnemonicParsing="false" prefHeight="27.0" prefWidth="141.0" text="ADD">
-                    <opaqueInsets>
-                        <Insets />
-                    </opaqueInsets>
-                    <VBox.margin>
-                        <Insets bottom="120.0" top="40.0" />
-                    </VBox.margin>
-                </Button>
-                <Button fx:id="changeBtn" mnemonicParsing="false" prefHeight="27.0" prefWidth="123.0" text="CHANGE" />
-                <Button fx:id="deleteBtn" mnemonicParsing="false" prefHeight="27.0" prefWidth="128.0" text="DELETE">
-                    <VBox.margin>
-                        <Insets top="120.0" />
-                    </VBox.margin>
-                </Button>
-            </children>
-        </VBox>
-    </left>
     <top>
         <Label text="Children" BorderPane.alignment="CENTER">
             <BorderPane.margin>
@@ -44,4 +25,15 @@
             </BorderPane.margin>
         </Label>
     </top>
+   <bottom>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="printReportBtn" alignment="CENTER" contentDisplay="CENTER" lineSpacing="1.0" mnemonicParsing="false" onAction="#printReport" prefHeight="100.0" prefWidth="300.0" style="-fx-background-color: green;" text="REPORT" textAlignment="CENTER">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+   </bottom>
 </BorderPane>

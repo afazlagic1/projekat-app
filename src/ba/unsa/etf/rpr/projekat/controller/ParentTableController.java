@@ -14,9 +14,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ParentTableController {
     public TableView parentTableView;
-    public Button addBtn;
-    public Button changeBtn;
-    public Button deleteBtn;
     public TableColumn idCol;
     public TableColumn nameCol;
     public TableColumn surnameCol;
@@ -26,7 +23,6 @@ public class ParentTableController {
     public TableColumn phoneNumberCol;
     private KindergartenDAO kindergartenDAO = KindergartenDAO.getInstance();
     private ObservableList<Parent> parents = FXCollections.observableArrayList(kindergartenDAO.getAllParentsDB());
-    private ObservableObjectValue<Parent> parent;
 
 
     public ParentTableController() {
@@ -43,17 +39,5 @@ public class ParentTableController {
         passwordCol.setCellValueFactory(new PropertyValueFactory<>("password"));
         statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
         phoneNumberCol.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
-    }
-
-    public void addAction(ActionEvent actionEvent) {
-
-    }
-
-    public void changeAction(ActionEvent actionEvent) {
-
-    }
-
-    public void deleteAction(ActionEvent actionEvent) {
-
     }
 }

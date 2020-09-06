@@ -1,6 +1,8 @@
 package ba.unsa.etf.rpr.projekat;
 
 import ba.unsa.etf.rpr.projekat.data.*;
+import javafx.event.ActionEvent;
+import net.sf.jasperreports.engine.JRException;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -493,5 +495,9 @@ public class KindergartenDAO {
             e.printStackTrace();
         }
         return teachers;
+    }
+
+    public Connection getConnection() {
+        return connection;
     }
 }
