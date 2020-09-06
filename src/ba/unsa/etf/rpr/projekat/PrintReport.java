@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 public class PrintReport extends JFrame {
     public void showReport(Connection conn) throws JRException {
-        String reportSrcFile = getClass().getResource("/reports/Kindergarten.jrxml").getFile();
+        String reportSrcFile = getClass().getResource("/reports/Child.jrxml").getFile();
         String reportsDir = getClass().getResource("/reports/").getFile();
 
         JasperReport jasperReport = JasperCompileManager.compileReport(reportSrcFile);
