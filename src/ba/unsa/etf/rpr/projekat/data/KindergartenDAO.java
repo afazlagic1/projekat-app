@@ -1,6 +1,6 @@
-package ba.unsa.etf.rpr.projekat;
+package ba.unsa.etf.rpr.projekat.data;
 
-import ba.unsa.etf.rpr.projekat.data.*;
+import ba.unsa.etf.rpr.projekat.InvalidYearsOldException;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -121,7 +121,10 @@ public class KindergartenDAO {
         }
         finally {
             try {
-                resultSet.close();
+                if(resultSet != null)
+                    resultSet.close();
+                if(resultSet == null)
+                    return false;
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }

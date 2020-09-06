@@ -1,6 +1,6 @@
 package ba.unsa.etf.rpr.projekat.controller;
 
-import ba.unsa.etf.rpr.projekat.KindergartenDAO;
+import ba.unsa.etf.rpr.projekat.data.KindergartenDAO;
 import ba.unsa.etf.rpr.projekat.PrintReport;
 import ba.unsa.etf.rpr.projekat.data.Child;
 import javafx.beans.property.SimpleStringProperty;

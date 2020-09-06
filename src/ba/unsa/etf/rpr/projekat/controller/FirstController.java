@@ -1,7 +1,7 @@
 package ba.unsa.etf.rpr.projekat.controller;
 
-import ba.unsa.etf.rpr.projekat.*;
 import ba.unsa.etf.rpr.projekat.data.Admin;
+import ba.unsa.etf.rpr.projekat.data.KindergartenDAO;
 import ba.unsa.etf.rpr.projekat.data.MaritalStatus;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -13,7 +13,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 

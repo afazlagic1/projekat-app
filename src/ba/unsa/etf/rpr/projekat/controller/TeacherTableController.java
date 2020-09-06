@@ -1,6 +1,6 @@
 package ba.unsa.etf.rpr.projekat.controller;
 
-import ba.unsa.etf.rpr.projekat.KindergartenDAO;
+import ba.unsa.etf.rpr.projekat.data.KindergartenDAO;
 import ba.unsa.etf.rpr.projekat.data.Teacher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
