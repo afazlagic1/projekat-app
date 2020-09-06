@@ -17,18 +17,12 @@
     <left>
         <VBox prefHeight="398.0" prefWidth="77.0" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="addBtn" mnemonicParsing="false" prefHeight="27.0" prefWidth="141.0" text="ADD">
+                <Button fx:id="addBtn" mnemonicParsing="false" onAction="#addAction" prefHeight="92.0" prefWidth="77.0" text="ADD">
                     <opaqueInsets>
                         <Insets />
                     </opaqueInsets>
                     <VBox.margin>
                         <Insets bottom="120.0" top="40.0" />
-                    </VBox.margin>
-                </Button>
-                <Button fx:id="changeBtn" mnemonicParsing="false" prefHeight="27.0" prefWidth="123.0" text="CHANGE" />
-                <Button fx:id="deleteBtn" mnemonicParsing="false" prefHeight="27.0" prefWidth="128.0" text="DELETE">
-                    <VBox.margin>
-                        <Insets top="120.0" />
                     </VBox.margin>
                 </Button>
             </children>

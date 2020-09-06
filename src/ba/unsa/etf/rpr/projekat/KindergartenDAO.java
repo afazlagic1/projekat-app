@@ -1,8 +1,6 @@
 package ba.unsa.etf.rpr.projekat;
 
 import ba.unsa.etf.rpr.projekat.data.*;
-import javafx.event.ActionEvent;
-import net.sf.jasperreports.engine.JRException;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -399,6 +397,8 @@ public class KindergartenDAO {
 
     private ArrayList<Child> getAllChildrenDBByIds(String childrenIdsList) {
         ArrayList<Child> childArrayList = new ArrayList<>();
+        if(childrenIdsList.equals(""))
+            return childArrayList;
         String[] ids = childrenIdsList.split(",");
         ResultSet rs = null;
         for(int i = 0; i < ids.length; i++) {
@@ -499,5 +499,26 @@ public class KindergartenDAO {
 
     public Connection getConnection() {
         return connection;
+    }
+
+    public int addNewClassroomDB(Teacher t) {
+        int id = -1;
+        try {
+            ResultSet resultSet = classroomMaxId.executeQuery();
+            if (resultSet.next()) {
+                insertNewClassroomStatement.setInt(1, resultSet.getInt(1));
+                id = resultSet.getInt(1);
+            } else {
+                insertNewClassroomStatement.setInt(1, 1);
+                id = 1;
+            }
+            insertNewClassroomStatement.setString(2, "");
+            insertNewClassroomStatement.setInt(3, t.getId());
+            insertNewClassroomStatement.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
     }
 }
