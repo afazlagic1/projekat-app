@@ -1,40 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
     <center>
         <TableView fx:id="teacherTableView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <columns>
-                <TableColumn fx:id="idCol" prefWidth="44.0" text="id" />
-                <TableColumn fx:id="nameCol" prefWidth="64.0" text="name" />
-                <TableColumn fx:id="surnameCol" prefWidth="81.0" text="surname" />
-                <TableColumn fx:id="phoneNumberCol" prefWidth="102.0" text="phoneNumber" />
+                <TableColumn fx:id="idCol" prefWidth="90.0" text="id" />
+                <TableColumn fx:id="nameCol" prefWidth="141.0" text="name" />
+                <TableColumn fx:id="surnameCol" prefWidth="151.0" text="surname" />
+                <TableColumn fx:id="phoneNumberCol" prefWidth="140.0" text="phoneNumber" />
             </columns>
         </TableView>
     </center>
     <left>
         <VBox prefHeight="398.0" prefWidth="77.0" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="addBtn" mnemonicParsing="false" prefHeight="27.0" prefWidth="141.0" text="ADD">
+                <Button fx:id="addBtn" mnemonicParsing="false" onAction="#addTeacherAction" prefHeight="27.0" prefWidth="141.0" text="ADD">
                     <opaqueInsets>
                         <Insets />
                     </opaqueInsets>
                     <VBox.margin>
                         <Insets bottom="120.0" top="40.0" />
-                    </VBox.margin>
-                </Button>
-                <Button fx:id="changeBtn" mnemonicParsing="false" prefHeight="27.0" prefWidth="123.0" text="CHANGE" />
-                <Button fx:id="deleteBtn" mnemonicParsing="false" prefHeight="27.0" prefWidth="128.0" text="DELETE">
-                    <VBox.margin>
-                        <Insets top="120.0" />
                     </VBox.margin>
                 </Button>
             </children>

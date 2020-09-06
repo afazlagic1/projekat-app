@@ -4,10 +4,17 @@ import ba.unsa.etf.rpr.projekat.KindergartenDAO;
 import ba.unsa.etf.rpr.projekat.data.Teacher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class TeacherTableController {
     public TableView<Teacher> teacherTableView;
@@ -27,4 +34,25 @@ public class TeacherTableController {
         phoneNumberCol.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
     }
 
+    public void addTeacherAction(ActionEvent actionEvent) {
+        Stage stage = new Stage();
+        Parent root = null;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/addTeacher.fxml"));
+        AddTeacherController tableController = new AddTeacherController();
+        loader.setController(tableController);
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        stage.setTitle("Add new teacher");
+        stage.setScene(new Scene(root, 700, 400));
+        stage.setResizable(false);
+        stage.show();
+
+        stage.setOnHiding(windowEvent -> {
+            teachers = FXCollections.observableArrayList(kindergartenDAO.getAllTeachersDB());
+            teacherTableView.setItems(teachers);
+        });
+    }
 }

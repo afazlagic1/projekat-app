@@ -8,34 +8,14 @@
     <center>
         <TableView fx:id="adminTableView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <columns>
-                <TableColumn fx:id="idCol" prefWidth="44.0" text="id" />
-                <TableColumn fx:id="nameCol" prefWidth="64.0" text="name" />
-                <TableColumn fx:id="surnameCol" prefWidth="81.0" text="surname" />
-                <TableColumn fx:id="usernameCol" prefWidth="87.0" text="username" />
-                <TableColumn fx:id="passwordCol" prefWidth="86.0" text="password" />
+                <TableColumn fx:id="idCol" prefWidth="64.0" text="id" />
+                <TableColumn fx:id="nameCol" prefWidth="123.0" text="name" />
+                <TableColumn fx:id="surnameCol" prefWidth="124.0" text="surname" />
+                <TableColumn fx:id="usernameCol" prefWidth="142.0" text="username" />
+                <TableColumn fx:id="passwordCol" prefWidth="146.0" text="password" />
             </columns>
         </TableView>
     </center>
-    <left>
-        <VBox prefHeight="398.0" prefWidth="77.0" BorderPane.alignment="CENTER">
-            <children>
-                <Button fx:id="addBtn" mnemonicParsing="false" onAction="#addAction" prefHeight="27.0" prefWidth="141.0" text="ADD">
-                    <opaqueInsets>
-                        <Insets />
-                    </opaqueInsets>
-                    <VBox.margin>
-                        <Insets bottom="120.0" top="40.0" />
-                    </VBox.margin>
-                </Button>
-                <Button fx:id="changeBtn" mnemonicParsing="false" onAction="#changeAction" prefHeight="27.0" prefWidth="123.0" text="CHANGE" />
-                <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#deleteAction" prefHeight="27.0" prefWidth="128.0" text="DELETE">
-                    <VBox.margin>
-                        <Insets top="120.0" />
-                    </VBox.margin>
-                </Button>
-            </children>
-        </VBox>
-    </left>
     <top>
         <Label text="Admins" BorderPane.alignment="CENTER">
             <BorderPane.margin>

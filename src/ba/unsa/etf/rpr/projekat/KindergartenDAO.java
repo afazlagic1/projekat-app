@@ -12,7 +12,7 @@ public class KindergartenDAO {
     private static KindergartenDAO instance;
     private Connection connection;
     private PreparedStatement giveAdminsStatement, giveParentsStatement, giveClassroomsStatement, giveChildrenStatement, giveTeachersStatement, giveAdminStatement, giveAdminByIdStatement, giveTeacherByIdStatement, giveClassroomByIdStatement, giveParentStatement, giveParentByIdStatement,giveChildByIdStatement, checkIfUsernameTakenAdminStatement, checkIfUsernameTakenParentStatement, insertNewParentStatement,
-            insertNewChildStatement, insertNewClassroomStatement, parentIdMax, childIdMax, classroomMaxId, findFreeClassroomStatement, changeClassroomStatement;
+            insertNewChildStatement, insertNewClassroomStatement, insertNewTeacherStatement, parentIdMax, childIdMax, classroomMaxId, teacherMaxId, findFreeClassroomStatement, changeClassroomStatement;
 
     public static KindergartenDAO getInstance() {
         if(instance == null)
@@ -55,9 +55,11 @@ public class KindergartenDAO {
                 insertNewParentStatement = connection.prepareStatement("INSERT INTO parent VALUES (?,?,?,?,?,?,?)");
                 insertNewChildStatement = connection.prepareStatement("INSERT INTO child VALUES (?,?,?,?,?,?)");
                 insertNewClassroomStatement = connection.prepareStatement("INSERT INTO classroom VALUES(?,?,?)");
+                insertNewTeacherStatement = connection.prepareStatement("INSERT INTO teacher VALUES (?,?,?,?)");
                 parentIdMax = connection.prepareStatement("SELECT MAX(id)+1 FROM parent");
                 childIdMax = connection.prepareStatement("SELECT MAX(id)+1 FROM child");
                 classroomMaxId = connection.prepareStatement("SELECT MAX(id)+1 FROM classroom");
+                teacherMaxId = connection.prepareStatement("SELECT MAX(id)+1 FROM teacher");
                 findFreeClassroomStatement = connection.prepareStatement("SELECT classroom.id, classroom.children, classroom.teacher FROM classroom WHERE (length(classroom.children)/2)<"+String.valueOf(Classroom.getCapacity()));
                 changeClassroomStatement = connection.prepareStatement("UPDATE classroom SET children=? WHERE id=?");
             } catch (SQLException e) {
@@ -259,6 +261,7 @@ public class KindergartenDAO {
             else {
                 int classroomId = addNewClassroomDB();
                 insertNewChildStatement.setInt(6, classroomId);
+                addChildToClassroom(classroomId, childId, "");
 
                 insertNewChildStatement.executeUpdate();
             }
@@ -420,9 +423,7 @@ public class KindergartenDAO {
                 Parent parent2 = null;
                 Classroom classroom = null;
                 if(resultSet.getObject(4) != null)
-                    parent1 = getParentById(resultSet.getInt(4));/*
-                if(resultSet.getObject(7) != null)
-                    classroom = getClassroomById(resultSet.getInt(7));*/
+                    parent1 = getParentById(resultSet.getInt(4));
                 child = new Child(id, resultSet.getString(2), resultSet.getString(3), parent1, resultSet.getInt(6), null);
             }
         }
@@ -520,5 +521,26 @@ public class KindergartenDAO {
             e.printStackTrace();
         }
         return id;
+    }
+
+    public void addNewTeacherDB(String name, String surname, String phoneNumber) {
+        int id = -1;
+        try {
+            ResultSet resultSet = teacherMaxId.executeQuery();
+            if(resultSet.next()) {
+                insertNewTeacherStatement.setInt(1, resultSet.getInt(1));
+                id = resultSet.getInt(1);
+            }
+            else {
+                insertNewTeacherStatement.setInt(1, 1);
+                id = 1;
+            }
+            insertNewTeacherStatement.setString(2, name);
+            insertNewTeacherStatement.setString(3, surname);
+            insertNewTeacherStatement.setInt(4, Integer.parseInt(phoneNumber));
+            insertNewTeacherStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

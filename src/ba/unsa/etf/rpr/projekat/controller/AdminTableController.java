@@ -33,16 +33,4 @@ public class AdminTableController {
         usernameCol.setCellValueFactory(new PropertyValueFactory<>("username"));
         passwordCol.setCellValueFactory(new PropertyValueFactory<>("password"));
     }
-
-    public void changeAction(ActionEvent actionEvent) {
-
-    }
-
-    public void deleteAction(ActionEvent actionEvent) {
-
-    }
-
-    public void addAction(ActionEvent actionEvent) {
-
-    }
 }
