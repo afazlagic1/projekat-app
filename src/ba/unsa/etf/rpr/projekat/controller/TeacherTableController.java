@@ -46,7 +46,7 @@ public class TeacherTableController {
             e.printStackTrace();
         }
         stage.setTitle("Add new teacher");
-        stage.setScene(new Scene(root, 700, 400));
+        stage.setScene(new Scene(root, 300, 300));
         stage.setResizable(false);
         stage.show();
 
