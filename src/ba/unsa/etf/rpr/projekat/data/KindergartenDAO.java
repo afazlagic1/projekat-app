@@ -236,6 +236,8 @@ public class KindergartenDAO {
 
     public void addNewChildDB(Parent parent, String name, String surname, int yo) {
         ResultSet resultSet, resultSet1;
+        if(!(yo >= 1 && yo <= 6))
+            return;
         int childId = -1;
         try {
             resultSet = childIdMax.executeQuery();
@@ -312,7 +314,8 @@ public class KindergartenDAO {
         giveParentStatement.setString(1, username);
         giveParentStatement.setString(2, password);
         ResultSet resultSet = giveParentStatement.executeQuery();
-        parent = new Parent(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getString(6), resultSet.getInt(7));
+        if(resultSet.next())
+            parent = new Parent(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getString(6), resultSet.getInt(7));
         }
         catch (SQLException s) {
             s.printStackTrace();
@@ -327,7 +330,8 @@ public class KindergartenDAO {
             giveAdminStatement.setString(1, username);
             giveAdminStatement.setString(2, password);
             ResultSet resultSet = giveAdminStatement.executeQuery();
-            admin = new Admin(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5));
+            if(resultSet.next())
+                admin = new Admin(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5));
         }
         catch (SQLException s) {
             s.printStackTrace();
@@ -526,7 +530,7 @@ public class KindergartenDAO {
         return id;
     }
 
-    public void addNewTeacherDB(String name, String surname, String phoneNumber) {
+    public int addNewTeacherDB(String name, String surname, String phoneNumber) {
         int id = -1;
         try {
             ResultSet resultSet = teacherMaxId.executeQuery();
@@ -542,8 +546,10 @@ public class KindergartenDAO {
             insertNewTeacherStatement.setString(3, surname);
             insertNewTeacherStatement.setInt(4, Integer.parseInt(phoneNumber));
             insertNewTeacherStatement.executeUpdate();
+            return id;
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return id;
     }
 }
