@@ -15,7 +15,7 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#openParentTable" prefHeight="176.0" prefWidth="382.0" text="PARENT TABLE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+      <Button fx:id="parentTableBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#openParentTable" prefHeight="176.0" prefWidth="382.0" text="PARENT TABLE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <font>
             <Font name="System Bold" size="25.0" />
          </font></Button>

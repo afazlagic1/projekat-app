@@ -15,7 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import net.sf.jasperreports.engine.JRException;
 
 public class ChildTableController {
-    public TableView<Child> parentTableView;
+    public TableView<Child> childTableView;
     public TableColumn idCol;
     public TableColumn nameCol;
     public TableColumn surnameCol;
@@ -28,7 +28,7 @@ public class ChildTableController {
 
     @FXML
     public void initialize() {
-        parentTableView.setItems(children);
+        childTableView.setItems(children);
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         surnameCol.setCellValueFactory(new PropertyValueFactory<>("surname"));
