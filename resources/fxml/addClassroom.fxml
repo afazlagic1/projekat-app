@@ -13,7 +13,7 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Button fx:id="addBtn" mnemonicParsing="false" onAction="#addNewClassroomAction" prefHeight="30.0" prefWidth="80.0" text="ADD" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+      <Button fx:id="addBtnClassroom" mnemonicParsing="false" onAction="#addNewClassroomAction" prefHeight="30.0" prefWidth="80.0" text="ADD" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
       <Button fx:id="cancelBtn" mnemonicParsing="false" onAction="#cancelAction" prefHeight="30.0" prefWidth="80.0" text="CANCEL" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
       <ChoiceBox fx:id="choiceTeacher" prefWidth="150.0" GridPane.columnIndex="1" />
       <Label text="Teacher:" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />

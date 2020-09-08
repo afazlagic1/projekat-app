@@ -12,7 +12,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.stage.Stage;
 
 public class AddClassroomController {
-    public Button addBtn;
+    public Button addBtnClassroom;
     public Button cancelBtn;
     public ChoiceBox<Teacher> choiceTeacher;
     private KindergartenDAO kindergartenDAO = KindergartenDAO.getInstance();
