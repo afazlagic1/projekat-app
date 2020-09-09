@@ -23,10 +23,10 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" text="Name:" textFill="#3437ff" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Label text="Surname:" textFill="#3437ff" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Label text="Password:" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-            <Label text="Username:" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Label fx:id="name" alignment="CENTER" contentDisplay="CENTER" text="%name" textFill="#3437ff" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Label text="%surname" textFill="#3437ff" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Label text="%password" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <Label text="%username" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
             <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets left="15.0" right="15.0" />
@@ -43,19 +43,19 @@
                <GridPane.margin>
                   <Insets left="15.0" right="15.0" />
                </GridPane.margin></TextField>
-            <Label text="Marital status:" textFill="#3437ff" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+            <Label text="%maritalStatus" textFill="#3437ff" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
             <ChoiceBox fx:id="statusBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-            <Button fx:id="btnRegister" alignment="CENTER" mnemonicParsing="false" onAction="#onRegisterClick" text="REGISTER" textFill="#3437ff" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+            <Button fx:id="btnRegister" alignment="CENTER" mnemonicParsing="false" onAction="#onRegisterClick" prefHeight="45.0" prefWidth="208.0" text="%REGISTER" textFill="#3437ff" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Button>
-            <Button fx:id="btnLogin" alignment="CENTER" mnemonicParsing="false" onAction="#onLoginClick" prefHeight="45.0" prefWidth="124.0" text="LOGIN" textFill="#e12727" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+            <Button fx:id="btnLogin" alignment="CENTER" mnemonicParsing="false" onAction="#onLoginClick" prefHeight="45.0" prefWidth="124.0" text="%LOGIN" textFill="#e12727" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-            <Label text="Phone number:" textFill="#3437ff" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+            <Label text="%phoneNumber" textFill="#3437ff" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
             <TextField fx:id="phoneNumberField" prefWidth="184.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets left="15.0" right="15.0" />
@@ -70,7 +70,7 @@
          </image></ImageView>
    </left>
    <right>
-      <Label alignment="CENTER" prefHeight="464.0" prefWidth="83.0" text="In case of LOGIN, you can fill out ONLY Username and Password fields!" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+      <Label alignment="CENTER" prefHeight="464.0" prefWidth="83.0" text="%note" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
          <padding>
             <Insets left="15.0" right="10.0" />
          </padding>
@@ -80,9 +80,22 @@
       </Label>
    </right>
    <top>
-      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-         <image>
-            <Image url="@../img/welcome.png" />
-         </image></ImageView>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="%File">
+               <items>
+                  <Menu fx:id="languageMenu" mnemonicParsing="false" text="%Language">
+                     <items>
+                        <CheckMenuItem fx:id="BS" mnemonicParsing="false" onAction="#changeToBS" text="BS" />
+                        <CheckMenuItem fx:id="EN" mnemonicParsing="false" onAction="#changeToEN" text="EN" />
+                     </items>
+                  </Menu>
+               </items></Menu>
+          <Menu mnemonicParsing="false" text="%Help">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="%About" />
+               </items></Menu>
+        </menus>
+      </MenuBar>
    </top>
 </BorderPane>

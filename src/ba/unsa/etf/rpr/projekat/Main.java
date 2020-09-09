@@ -7,11 +7,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.ResourceBundle;
+
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/first.fxml"));
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("TranslationFirst");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/first.fxml"), resourceBundle);
         FirstController firstController = new FirstController();
         firstController.resetDatabase();
         loader.setController(firstController);

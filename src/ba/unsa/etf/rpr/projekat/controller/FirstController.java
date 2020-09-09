@@ -19,6 +19,8 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class FirstController {
     public PasswordField passwordField;
@@ -31,6 +33,7 @@ public class FirstController {
     private ImageView imageView;
     public Button btnRegister;
     public Button btnLogin;
+    public CheckMenuItem BS, EN;
     private KindergartenDAO kindergartenDAO = KindergartenDAO.getInstance();
 
     public FirstController() {
@@ -188,5 +191,43 @@ public class FirstController {
         File file = new File("baza.db");
         file.delete();
         kindergartenDAO = KindergartenDAO.getInstance();
+    }
+
+    private void translate() {
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("TranslationFirst");
+        Stage stage = (Stage) usernameField.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/first.fxml"), resourceBundle);
+        loader.setController(this);
+        try {
+            stage.setScene(new Scene(loader.load(), 700, 400));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void changeToBS(ActionEvent actionEvent) {
+        if(BS.isSelected()) {
+            EN.setSelected(false);
+            Locale.setDefault(new Locale("bs", "BA"));
+            translate();
+        }
+        else {
+            EN.setSelected(true);
+            Locale.setDefault(new Locale("en_US", "ENG"));
+            translate();
+        }
+    }
+
+    public void changeToEN(ActionEvent actionEvent) {
+        if(EN.isSelected()) {
+            BS.setSelected(false);
+            Locale.setDefault(new Locale("en_US", "ENG"));
+            translate();
+        }
+        else {
+            BS.setSelected(true);
+            Locale.setDefault(new Locale("bs", "BA"));
+            translate();
+        }
     }
 }
