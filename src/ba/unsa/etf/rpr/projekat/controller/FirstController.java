@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.projekat.controller;
 
+import ba.unsa.etf.rpr.projekat.ChangeableLanguage;
 import ba.unsa.etf.rpr.projekat.data.Admin;
 import ba.unsa.etf.rpr.projekat.data.KindergartenDAO;
 import ba.unsa.etf.rpr.projekat.data.MaritalStatus;
@@ -15,14 +16,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public class FirstController {
+public class FirstController implements ChangeableLanguage {
     public PasswordField passwordField;
     public TextField usernameField;
     public TextField surnameField;
@@ -99,7 +99,8 @@ public class FirstController {
 
                 Stage stage = new Stage();
                 Parent root = null;
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/parent.fxml"));
+                ResourceBundle resourceBundle = ResourceBundle.getBundle("TranslationParent");
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/parent.fxml"), resourceBundle);
                 ParentController parentController = new ParentController(parent);
                 loader.setController(parentController);
                 try {
@@ -168,10 +169,10 @@ public class FirstController {
                 //ovdje otvoriti novi prozor za roditelja
                 //prije toga dodavanje u bazu
                 ba.unsa.etf.rpr.projekat.data.Parent parent = kindergartenDAO.addNewParentDB(nameField.getText(), surnameField.getText(), usernameField.getText(), passwordField.getText(), statusBox.getValue().toString(), phoneNumberField.getText());
-
+                ResourceBundle resourceBundle = ResourceBundle.getBundle("TranslationParent");
                 Stage stage = new Stage();
                 Parent root = null;
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/parent.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/parent.fxml"), resourceBundle);
                 ParentController parentController = new ParentController(parent);
                 loader.setController(parentController);
                 try {
@@ -194,7 +195,7 @@ public class FirstController {
         kindergartenDAO = KindergartenDAO.getInstance();
     }
 
-    private void translate() {
+    public void translate() {
         ResourceBundle resourceBundle = ResourceBundle.getBundle("TranslationFirst");
         Stage stage = (Stage) usernameField.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/first.fxml"), resourceBundle);
