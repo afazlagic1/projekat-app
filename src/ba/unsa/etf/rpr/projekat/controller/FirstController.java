@@ -42,6 +42,7 @@ public class FirstController {
 
     @FXML
     public void initialize() {
+        EN.setSelected(true);
         phoneNumberField.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
@@ -207,27 +208,51 @@ public class FirstController {
 
     public void changeToBS(ActionEvent actionEvent) {
         if(BS.isSelected()) {
-            EN.setSelected(false);
             Locale.setDefault(new Locale("bs", "BA"));
             translate();
+            BS.setSelected(true);
+            EN.setSelected(false);
         }
         else {
-            EN.setSelected(true);
             Locale.setDefault(new Locale("en_US", "ENG"));
             translate();
+            EN.setSelected(true);
+            BS.setSelected(false);
         }
     }
 
     public void changeToEN(ActionEvent actionEvent) {
         if(EN.isSelected()) {
-            BS.setSelected(false);
             Locale.setDefault(new Locale("en_US", "ENG"));
             translate();
+            BS.setSelected(false);
+            EN.setSelected(true);
         }
         else {
-            BS.setSelected(true);
             Locale.setDefault(new Locale("bs", "BA"));
             translate();
+            BS.setSelected(true);
+            EN.setSelected(false);
         }
+    }
+
+    public void alertAbout(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        if(BS.isSelected())
+            alert.setContentText("Dobro došli u Kindergarten!" + "\n" + "Ova aplikacija je namijenjena roditeljima koji žele upisati svoje dijete/svoju djecu u baš naš vrtić." + "\n"
+            + "Zašto baš ovaj pitate se?\nOsim toga što se nalazimo na pristupačnoj lokaciji (centar) i besplatnog parkinga za sve roditelje, imamo i izvrsne učitelje uvijek spremne posvetiti se svakom djetetu pojedinačno." +
+                    " Za doručak i ručak su obezbijeđeni kvalitetni, raznovrsni i zdravi obroci, i naš meni se mijenja svake sedmice."+ "\n" +
+                    "Vaše je samo da se registrujete i upišete svoje dijete.\n Mi ćemo vas kontaktirati ukoliko budemo imali nekih pitanja prije vašeg prvog dolaska u naše prostorije!" + "\nNadamo se da ćemo uskoro upoznati vas i vašu djecu! :)");
+        else
+            alert.setContentText("Welcome to Kindergarten!" + "\n" + "This app is intended to be used by parents who wish to register their child/ children to our place." + "\n"
+                    + "Why this one you wonder?\nBesides the convinient location (center) and the free parking space for all parents, we also have excellent teachers always ready to put their best effort." +
+                    " For breakfast and lunch we serve high-quality, various and healthy meals and our menu changes every week."+ "\n" +
+                    "You only need to register your child.\n We'll contact you in case we have any questions before your first arrival here!" + "\nWe are looking forward meeting you and your children! :)");
+        if(BS.isSelected())
+            alert.setTitle("O aplikaciji");
+        else
+            alert.setTitle("About");
+        alert.setHeaderText("Kindergarten");
+        alert.showAndWait();
     }
 }
