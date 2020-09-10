@@ -60,7 +60,7 @@ public class KindergartenDAO {
                 childIdMax = connection.prepareStatement("SELECT MAX(id)+1 FROM child");
                 classroomMaxId = connection.prepareStatement("SELECT MAX(id)+1 FROM classroom");
                 teacherMaxId = connection.prepareStatement("SELECT MAX(id)+1 FROM teacher");
-                findFreeClassroomStatement = connection.prepareStatement("SELECT classroom.id, classroom.children, classroom.teacher FROM classroom WHERE (length(classroom.children)/2)<"+String.valueOf(Classroom.getCapacity()));
+                findFreeClassroomStatement = connection.prepareStatement("SELECT classroom.id, classroom.children, classroom.teacher FROM classroom WHERE (length(classroom.children) - length(replace(classroom.children, ',', '')))<"+String.valueOf(Classroom.getCapacity()));
                 changeClassroomStatement = connection.prepareStatement("UPDATE classroom SET children=? WHERE id=?");
             } catch (SQLException e) {
                 e.printStackTrace();
