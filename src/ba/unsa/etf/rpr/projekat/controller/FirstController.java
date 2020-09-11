@@ -63,13 +63,19 @@ public class FirstController implements ChangeableLanguage {
         if(usernameField.getText().equals("")) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("INVALID LOGIN");
-            alert.setContentText("Please enter your username before login. :)");
+            if(EN.isSelected())
+                alert.setContentText("Please enter your username before login. :)");
+            else
+                alert.setContentText("Molim Vas upišite svoje korisničko ime. :)");
             alert.showAndWait();
         }
         else if(passwordField.getText().equals("")) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("INVALID LOGIN");
-            alert.setContentText("Please enter your password before login. :)");
+            if(EN.isSelected())
+                alert.setContentText("Please enter your password before login. :)");
+            else
+                alert.setContentText("Molim Vas upišite svoju lozinku. :)");
             alert.showAndWait();
         }
         else {
@@ -125,44 +131,65 @@ public class FirstController implements ChangeableLanguage {
         if(usernameField.getText().equals("")) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("INVALID REGISTER");
-            alert.setContentText("Please enter your username before you register. :)");
+            if(EN.isSelected())
+                alert.setContentText("Please enter your username before you register. :)");
+            else
+                alert.setContentText("Molimo popunite sve prije registracije. :)");
             alert.showAndWait();
         }
         else if(passwordField.getText().equals("")) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("INVALID REGISTER");
-            alert.setContentText("Please enter your password before you register. :)");
+            if(EN.isSelected())
+                alert.setContentText("Please enter your password before you register. :)");
+            else
+                alert.setContentText("Molimo popunite sve prije registracije. :)");
             alert.showAndWait();
         }
         else if(nameField.getText().equals("")) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("INVALID REGISTER");
-            alert.setContentText("Please enter your name before you register. :)");
+            if(EN.isSelected())
+                alert.setContentText("Please enter your name before you register. :)");
+            else
+                alert.setContentText("Molimo popunite sve prije registracije. :)");
             alert.showAndWait();
         }
         else if(surnameField.getText().equals("")) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("INVALID REGISTER");
-            alert.setContentText("Please enter your surname before you register. :)");
+            if(EN.isSelected())
+                alert.setContentText("Please enter your surname before you register. :)");
+            else
+                alert.setContentText("Molimo popunite sve prije registracije. :)");
             alert.showAndWait();
         }
         else if(statusBox.getValue() == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("INVALID REGISTER");
-            alert.setContentText("Please enter your marital status before you register. :)");
+            if(EN.isSelected())
+                alert.setContentText("Please enter your marital status before you register. :)");
+            else
+                alert.setContentText("Molimo popunite sve prije registracije. :)");
             alert.showAndWait();
         }
         else if(phoneNumberField.getText().equals("")) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("INVALID REGISTER");
-            alert.setContentText("Please enter your phone number before you register. :)");
+            if(EN.isSelected())
+                alert.setContentText("Please enter your phone number before you register. :)");
+            else
+                alert.setContentText("Molimo popunite sve prije registracije. :)");
             alert.showAndWait();
         }
         else {
             if(kindergartenDAO.registerCheckIfUsernameTaken(usernameField.getText())) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("INVALID REGISTER");
-                alert.setContentText("That username is already taken, sorry. :)");
+                if(EN.isSelected())
+                    alert.setContentText("That username is already taken, sorry. :)");
+                else
+                    alert.setContentText("To korisničko ime je zauzeto, žao nam je. :)");
                 alert.showAndWait();
             }
             else {

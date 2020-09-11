@@ -45,22 +45,34 @@ public class ParentController implements ChangeableLanguage {
     public void registerAction(ActionEvent actionEvent) {
         if(nameF.getText().equals("")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Please enter the name of your child. :)");
+            if(EN.isSelected())
+                alert.setContentText("Please enter the name of your child. :)");
+            else
+                alert.setContentText("Molim Vas da unesete ime djeteta. :)");
             alert.showAndWait();
         }
         else if(surnameF.getText().equals("")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Please enter the surname of your child. :)");
+            if(EN.isSelected())
+                alert.setContentText("Please enter the surname of your child. :)");
+            else
+                alert.setContentText("Molim Vas da unesete prezime djeteta. :)");
             alert.showAndWait();
         }
         else if(yoF.getText().equals("")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Please enter how old is your child. :)");
+            if(EN.isSelected())
+                alert.setContentText("Please enter how old is your child. :)");
+            else
+                alert.setContentText("Molim Vas da unesete godine djeteta. :)");
             alert.showAndWait();
         }
         else if(!(Integer.parseInt(yoF.getText()) >= 1 && Integer.parseInt(yoF.getText()) <= 6)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("The years range for children is from 1 to 6. :)");
+            if(EN.isSelected())
+                alert.setContentText("The years range for children is from 1 to 6. :)");
+            else
+                alert.setContentText("Djeca trebaju imati od 1 do 6 godina. :)");
             alert.showAndWait();
         }
         else {
@@ -68,7 +80,10 @@ public class ParentController implements ChangeableLanguage {
             System.out.println(parent.toString());
             kindergartenDAO.addNewChildDB(parent, nameF.getText(), surnameF.getText(), Integer.parseInt(yoF.getText()));
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("You sucessfully registered your child!");
+            if(EN.isSelected())
+                alert.setContentText("You sucessfully registered your child!");
+            else
+                alert.setContentText("Uspješno ste registrovali svoje dijete!");
             alert.showAndWait();
         }
     }
