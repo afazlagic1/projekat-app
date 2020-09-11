@@ -14,12 +14,16 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
+
+import java.util.ResourceBundle;
+
 @ExtendWith(ApplicationExtension.class)
 class ParentControllerTest {
 
     @Start
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/first.fxml"));
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("TranslationFirst");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/first.fxml"), resourceBundle);
         FirstController firstController = new FirstController();
         firstController.resetDatabase();
         loader.setController(firstController);
@@ -53,5 +57,6 @@ class ParentControllerTest {
         fxRobot.write("4");
         fxRobot.clickOn("#registerBtn");
         assertNotNull(fxRobot.lookup("OK").queryAs(Button.class));
+        fxRobot.clickOn("OK");
     }
 }
