@@ -41,6 +41,7 @@ public class Classroom {
     public void addChildToClassroom(Child child) {
         if(getChildren().size() == capacity)
             throw new ArrayIndexOutOfBoundsException();
+        children.add(child);
     }
 
     public Teacher getTeacher() {
