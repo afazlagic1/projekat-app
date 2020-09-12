@@ -18,6 +18,9 @@ public class AddTeacherController {
     public Button cancel;
     private KindergartenDAO kindergartenDAO = KindergartenDAO.getInstance();
 
+    public AddTeacherController() {
+    }
+
     @FXML
     public void initialize() {
         phoneF.textProperty().addListener(new ChangeListener<String>() {

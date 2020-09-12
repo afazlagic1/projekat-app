@@ -20,7 +20,9 @@ public class AdminTableController {
     public TableColumn passwordCol;
     private KindergartenDAO kindergartenDAO = KindergartenDAO.getInstance();
     private ObservableList<Admin> admins = FXCollections.observableArrayList(kindergartenDAO.getAllAdminsDB());
-    private ObservableObjectValue<Admin> admin;
+
+    public AdminTableController() {
+    }
 
     @FXML
     public void initialize() {

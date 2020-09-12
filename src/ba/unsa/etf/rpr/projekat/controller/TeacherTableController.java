@@ -25,6 +25,9 @@ public class TeacherTableController {
     private KindergartenDAO kindergartenDAO = KindergartenDAO.getInstance();
     private ObservableList<Teacher> teachers = FXCollections.observableArrayList(kindergartenDAO.getAllTeachersDB());
 
+    public TeacherTableController() {
+    }
+
     @FXML
     public void initialize() {
         teacherTableView.setItems(teachers);

@@ -26,6 +26,9 @@ public class ChildTableController {
     private KindergartenDAO kindergartenDAO = KindergartenDAO.getInstance();
     private ObservableList<Child> children = FXCollections.observableArrayList(kindergartenDAO.getChildrenDB());
 
+    public ChildTableController() {
+    }
+
     @FXML
     public void initialize() {
         childTableView.setItems(children);
